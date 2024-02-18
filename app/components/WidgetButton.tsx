@@ -6,18 +6,25 @@ type WidgetButtonProps = {
   variant: "primary" | "secondary" | "closeIcon";
   label: string;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  fullWidth?: boolean;
 };
 
 const WidgetButton = ({
   variant,
   label,
   onClick,
+  fullWidth,
 }: WidgetButtonProps): JSX.Element => {
   return variant === "closeIcon" ? (
     <IconButton
       size="large"
       aria-label={label}
-      sx={{ ...styles.baseButton, ...styles.primary, p: 1 }}
+      sx={{
+        ...styles.baseButton,
+        ...styles.primary,
+        p: 1,
+        ...(fullWidth && { width: "100%" }),
+      }}
       onClick={onClick}
     >
       <CloseIcon fontSize="inherit" />
@@ -25,7 +32,12 @@ const WidgetButton = ({
   ) : (
     <Button
       variant={variant === "primary" ? "contained" : "outlined"}
-      sx={{ ...styles.baseButton, ...styles[variant] }}
+      sx={{
+        ...styles.baseButton,
+        ...styles[variant],
+        ...(fullWidth && { width: "100%" }),
+        p: "12px 16px",
+      }}
       onClick={onClick}
     >
       {label}
