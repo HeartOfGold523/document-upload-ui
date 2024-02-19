@@ -20,6 +20,7 @@
     "paths": {
       "@/*": ["./*"],
       "@/components": ["./app/components/index.ts"],
+      "@/constants": ["./app/constants/index.ts"],
       "@/icons": ["./app/icons/index.ts"]
     }
   },

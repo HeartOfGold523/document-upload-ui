@@ -9,6 +9,7 @@ import {
   WidgetSelect,
   WidgetSwitch,
 } from "@/components";
+import { strings } from "@/constants";
 import { ClockIcon } from "@/icons";
 
 const DocumentUploadWidget = (): JSX.Element => {
@@ -25,28 +26,28 @@ const DocumentUploadWidget = (): JSX.Element => {
   ]);
 
   const selectImportNameItems = [
-    { label: "None", value: "" },
-    { label: "Test Import 1", value: 1 },
-    { label: "Test Import 2", value: 2 },
-    { label: "Test Import 3", value: 3 },
+    { label: strings.none, value: "" },
+    { label: strings.testImport1, value: 1 },
+    { label: strings.testImport2, value: 2 },
+    { label: strings.testImport3, value: 3 },
   ];
 
   const radioSplitScheduleItems = [
-    { label: "Yes", value: "y" },
-    { label: "No", value: "n" },
+    { label: strings.yes, value: "y" },
+    { label: strings.no, value: "n" },
   ];
 
   const radioClientItems = [
-    { label: "Single", value: "s" },
-    { label: "Multiple", value: "m" },
+    { label: strings.single, value: "s" },
+    { label: strings.multiple, value: "m" },
   ];
 
   const selectClientItems = [
-    { label: "None", value: "" },
-    { label: "Test Client 1", value: 1 },
-    { label: "Test Client 2", value: 2 },
-    { label: "Test Client 3", value: 3 },
-    { label: "Test Client 4", value: 4 },
+    { label: strings.none, value: "" },
+    { label: strings.testClient1, value: 1 },
+    { label: strings.testClient2, value: 2 },
+    { label: strings.testClient3, value: 3 },
+    { label: strings.testClient4, value: 4 },
   ];
 
   const handleClickClose = () => {
@@ -109,19 +110,19 @@ const DocumentUploadWidget = (): JSX.Element => {
     <Paper sx={styles.widgetContainer}>
       <WidgetButton
         variant="closeIcon"
-        label="Close"
+        label={strings.close}
         onClick={handleClickClose}
       />
       <Box sx={styles.widgetTitleContainer}>
         <Typography variant="h1" sx={styles.widgetTitle}>
-          Document Upload
+          {strings.documentUpload}
         </Typography>
         <Box sx={{ ...styles.divider, m: "0 auto" }} />
       </Box>
       <Box sx={styles.widgetBodyContainer}>
         <Box sx={styles.widgetBodyColumn}>
           <WidgetSelect
-            label="Select Import Name"
+            label={strings.selectImportName}
             items={selectImportNameItems}
             value={importName}
             onChange={handleSelectImportName}
@@ -130,7 +131,7 @@ const DocumentUploadWidget = (): JSX.Element => {
           <Box sx={styles.divider} />
           <Box sx={{ ...styles.widgetBodyColumn, gap: 1 }}>
             <Typography variant="body1" sx={styles.widgetBodyTitle}>
-              Select a manifest that you’d like to import
+              {strings.selectAManifest}
             </Typography>
             <WidgetFileUpload
               file={uploadedFile}
@@ -141,27 +142,27 @@ const DocumentUploadWidget = (): JSX.Element => {
           <Box sx={styles.divider} />
           <Box sx={{ ...styles.widgetBodyColumn, gap: 1 }}>
             <Typography variant="body1" sx={styles.widgetBodyTitle}>
-              Elapse Data Checking:
+              {strings.elapseDataChecking}
             </Typography>
             <Typography
               variant="body1"
               sx={{ ...styles.widgetBodyTitle, ...styles.greenText }}
             >
-              No Elapsed Dates!
+              {strings.noElapsedDates}
             </Typography>
           </Box>
           <Box sx={styles.divider} />
           <Box sx={{ ...styles.widgetBodyColumn, gap: 1 }}>
             <Typography variant="body1" sx={styles.widgetBodyTitle}>
-              Tolerance Window:
+              {strings.toleranceWindow}
             </Typography>
             <WidgetSwitch
               label={
                 <>
-                  Toggle {toleranceWindow ? "ON" : "OFF"}
-                  <span>|</span>
+                  {strings.toggle} {toleranceWindow ? strings.on : strings.off}
+                  <span>{strings.pipeBar}</span>
                   <ClockIcon />
-                  Select Tolerance Level
+                  {strings.selectToleranceLevel}
                 </>
               }
               checked={toleranceWindow}
@@ -177,7 +178,7 @@ const DocumentUploadWidget = (): JSX.Element => {
               variant="body1"
               sx={styles.widgetBodyTitle}
             >
-              Split schedule using social distancing?
+              {strings.splitSchedule}
             </Typography>
             <WidgetRadio
               labelledBy="radio-label-one"
@@ -189,13 +190,13 @@ const DocumentUploadWidget = (): JSX.Element => {
           <Box sx={styles.divider} />
           <Box sx={{ ...styles.widgetBodyColumn, gap: 1 }}>
             <Typography variant="body1" sx={styles.widgetBodyTitle}>
-              Location Checking:
+              {strings.locationChecking}
             </Typography>
             <Typography
               variant="body1"
               sx={{ ...styles.widgetBodyTitle, ...styles.greenText }}
             >
-              All Available!
+              {strings.allAvailable}
             </Typography>
           </Box>
           <Box sx={styles.divider} />
@@ -205,7 +206,7 @@ const DocumentUploadWidget = (): JSX.Element => {
               variant="body1"
               sx={styles.widgetBodyTitle}
             >
-              Client:
+              {strings.client}
             </Typography>
             <WidgetRadio
               labelledBy="radio-label-two"
@@ -223,11 +224,11 @@ const DocumentUploadWidget = (): JSX.Element => {
                     variant="body2"
                     sx={{ ...styles.widgetBodyTitle, fontWeight: "normal" }}
                   >
-                    {`Testing Center ${index + 1}`}
+                    {strings.testingCenter} {index + 1}
                   </Typography>
                   <Box sx={styles.clientSubContainer}>
                     <WidgetSelect
-                      label="Select Client"
+                      label={strings.selectClient}
                       items={selectClientItems}
                       value={testingCenters[index]}
                       onChange={(e) => handleSelectTestingCenter(e, index)}
@@ -249,18 +250,18 @@ const DocumentUploadWidget = (): JSX.Element => {
             fontSize: { xs: "1.25rem", md: "1.5rem" },
           }}
         >
-          Data in the import file is correct. Please press Continue to import.
+          {strings.dataInTheImportFile}
         </Typography>
         <Box sx={styles.widgetFooterButtonsContainer}>
           <WidgetButton
             variant="primary"
-            label="Continue Import"
+            label={strings.continueImport}
             onClick={handleClickContinue}
             fullWidth
           />
           <WidgetButton
             variant="secondary"
-            label="Cancel"
+            label={strings.cancel}
             onClick={handleClickCancel}
             fullWidth
           />

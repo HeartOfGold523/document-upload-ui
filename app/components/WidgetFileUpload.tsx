@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PhotoIcon from "@mui/icons-material/Photo";
 
 import { WidgetButton } from "@/components";
+import { strings } from "@/constants";
 
 type WidgetFileUploadProps = {
   file: File | null;
@@ -86,7 +87,7 @@ const WidgetFileUpload = ({
 
   const formatFileSize = (bytes: number) => {
     const k = bytes > 0 ? Math.floor(Math.log2(bytes) / 10) : 0;
-    const rank = (k > 0 ? "KMGT"[k - 1] : "") + "b";
+    const rank = (k > 0 ? strings.kgmt[k - 1] : "") + strings.b;
     const count = Math.floor(bytes / Math.pow(1024, k));
     return count + rank;
   };
@@ -115,13 +116,13 @@ const WidgetFileUpload = ({
           <Box sx={styles.dashedContainer}>
             <DescriptionIcon fontSize="large" sx={styles.icon} />
             <Typography variant="body2" sx={styles.description}>
-              Drag & Drop Here Or <b>Browse</b>
+              {strings.dragAndDrop} <b>{strings.browse}</b>
             </Typography>
           </Box>
           <Box sx={styles.buttonContainer}>
             <WidgetButton
               variant="primary"
-              label="Upload Manifest"
+              label={strings.uploadManifest}
               onClick={handleClickUpload}
               fullWidth
             />
