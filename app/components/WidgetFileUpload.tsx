@@ -196,6 +196,7 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
     gap: 1,
+    textAlign: "center",
   },
   icon: {
     color: "orange",
