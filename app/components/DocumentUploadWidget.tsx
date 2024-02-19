@@ -4,6 +4,7 @@ import { Box, Paper, SelectChangeEvent, Typography } from "@mui/material";
 
 import {
   WidgetButton,
+  WidgetFileUpload,
   WidgetRadio,
   WidgetSelect,
   WidgetSwitch,
@@ -12,7 +13,8 @@ import { ClockIcon } from "@/icons";
 
 const DocumentUploadWidget = (): JSX.Element => {
   const [importName, setImportName] = useState<string | number>("");
-  const [toleranceWindow, setToleranceWindow] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [toleranceWindow, setToleranceWindow] = useState(true);
   const [splitSchedule, setSplitSchedule] = useState("y");
   const [client, setClient] = useState("m");
   const [testingCenters, setTestingCenters] = useState<Array<string | number>>([
@@ -54,6 +56,16 @@ const DocumentUploadWidget = (): JSX.Element => {
   const handleSelectImportName = (e: SelectChangeEvent<string | number>) => {
     console.log("Select Import Name value changed");
     setImportName(e.target.value);
+  };
+
+  const handleUploadFile = (file: File) => {
+    console.log("File uploaded");
+    setUploadedFile(file);
+  };
+
+  const handleRemoveFile = () => {
+    console.log("File removed");
+    setUploadedFile(null);
   };
 
   const handleChangeToleranceWindow = (
@@ -115,6 +127,17 @@ const DocumentUploadWidget = (): JSX.Element => {
             onChange={handleSelectImportName}
             boldLabel
           />
+          <Box sx={styles.divider} />
+          <Box sx={{ ...styles.widgetBodyColumn, gap: 1 }}>
+            <Typography variant="body1" sx={styles.widgetBodyTitle}>
+              Select a manifest that you’d like to import
+            </Typography>
+            <WidgetFileUpload
+              file={uploadedFile}
+              onFileUpload={handleUploadFile}
+              onRemoveFile={handleRemoveFile}
+            />
+          </Box>
           <Box sx={styles.divider} />
           <Box sx={{ ...styles.widgetBodyColumn, gap: 1 }}>
             <Typography variant="body1" sx={styles.widgetBodyTitle}>
